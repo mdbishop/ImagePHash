@@ -44,31 +44,36 @@ class ImagePHashTest extends GroovyTestCase {
 
     void testGetPHash() {
         long start = System.currentTimeMillis();
-        def phash = new ImagePHash()
+        ImagePHash phash = new ImagePHash()
         def hash = phash.getHash(inputStream)
+        assert hash && (!hash.equals("0 * 64"))
+
         println "Old hash took " + (System.currentTimeMillis() - start) + " ms"
         println hash
+        println "success"
     }
 
     void testGetPHash2() {
         long start = System.currentTimeMillis();
 
-        def phash = new ImagePHash2()
+        ImagePHash2 phash = new ImagePHash2()
         def hash = phash.getHash(inputStream)
-        println "New hash took " + (System.currentTimeMillis() - start) + " ms"
+        assert hash && (!hash.equals("0 * 64"))
 
+        println "New hash took " + (System.currentTimeMillis() - start) + " ms"
         println hash
+        println "success"
     }
 
     void testOldAndNewHashesMatch() {
-        def phash = new ImagePHash()
-        def phash2 = new ImagePHash()
+        ImagePHash phash = new ImagePHash()
+        ImagePHash2 phash2 = new ImagePHash2()
 
         def hash1 = phash.getHash(inputStream)
         setUp() // Inputstream is getting closed
         def hash2 = phash2.getHash(inputStream)
 
         assertEquals(hash1, hash2)
-        println "success"
+        println "success, old and new hashes match"
     }
 }
