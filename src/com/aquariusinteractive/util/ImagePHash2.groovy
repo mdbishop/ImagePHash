@@ -93,8 +93,6 @@ class ImagePHash2 {
             }
         }
 
-        is?.close()
-
         /* 3. Compute the DCT.
          * The DCT separates the image into a collection of frequencies
          * and scalars. While JPEG uses an 8x8 DCT, this algorithm uses
