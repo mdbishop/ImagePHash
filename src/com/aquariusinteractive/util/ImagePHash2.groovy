@@ -197,7 +197,7 @@ class ImagePHash2 {
                                Math.cos(((2 * j + 1) / (doubleN)) * v * PI) * (f[i][j]);
                     }
                 }
-                sum *= ((c[u] * c[v]) / 4d);
+                sum *= ((c[u] * c[v]) / 4.0d);
                 F[u][v] = sum;
             }
         }
