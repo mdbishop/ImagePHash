@@ -23,8 +23,9 @@ import static java.lang.Math.PI
  */
 
 /**
- * TODO http://nekkidphpprogrammer.blogspot.fi/2014/02/yes-it-is-perfect-now.html
- * TODO http://www.hackerfactor.com/blog/index.php?/archives/432-Looks-Like-It.html
+ * TODO Potential enhancements here
+ *  http://nekkidphpprogrammer.blogspot.fi/2014/02/yes-it-is-perfect-now.html
+ *  http://www.hackerfactor.com/blog/index.php?/archives/432-Looks-Like-It.html
  */
 @CompileStatic
 class ImagePHash2 {
@@ -171,8 +172,6 @@ class ImagePHash2 {
         return (img.getRGB(x, y)) & 0xff;
     }
 
-    // DCT function stolen from http://stackoverflow.com/questions/4240490/problems-with-dct-and-idct-algorithm-in-java
-
     private double[] c;
 
     private void initCoefficients() {
@@ -184,6 +183,7 @@ class ImagePHash2 {
         }
     }
 
+    // DCT function stolen from http://stackoverflow.com/questions/4240490/problems-with-dct-and-idct-algorithm-in-java
 
     private double[][] applyDCT(final double[][] f) {
         final int N = size;
