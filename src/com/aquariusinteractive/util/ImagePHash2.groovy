@@ -37,6 +37,9 @@ class ImagePHash2 {
 
     private int size = 32;
     private int smallerSize = 8;
+    private static final char ONE  = "1"
+    private static final char ZERO = "0"
+
 
     public ImagePHash2() {
         initCoefficients();
@@ -98,9 +101,7 @@ class ImagePHash2 {
          * and scalars. While JPEG uses an 8x8 DCT, this algorithm uses
          * a 32x32 DCT.
          */
-//        long start = System.currentTimeMillis();
         double[][] dctVals = applyDCT(vals);
-//        System.out.println("DCT: " + (System.currentTimeMillis() - start));
 
         /* 4. Reduce the DCT.
          * This is the magic step. While the DCT is 32x32, just keep the
@@ -113,15 +114,9 @@ class ImagePHash2 {
          * since the DC coefficient can be significantly different from
          * the other values and will throw off the average).
          */
-        double total = 0;
+        double total = sumMatrix(dctVals)
 
-        for (int x = 0; x < smallerSize; x++) {
-            for (int y = 0; y < smallerSize; y++) {
-                total += dctVals[x][y];
-            }
-        }
         total -= dctVals[0][0];
-
 
         double avg = total / (double) ((smallerSize * smallerSize) - 1);
 
@@ -140,12 +135,17 @@ class ImagePHash2 {
         for (int x = 0; x < smallerSize; x++) {
             for (int y = 0; y < smallerSize; y++) {
                 if (x != 0 && y != 0) {
-                    hash.append((dctVals[x][y] > avg ? "1" : "0"))
+                    hash.append((dctVals[x][y] > avg ? ONE : ZERO))
                 }
             }
         }
 
         return hash;
+    }
+
+    @TypeChecked(TypeCheckingMode.SKIP)
+    private static double sumMatrix(matrix) {
+        return matrix?.flatten()?.sum()
     }
 
     private static BufferedImage resize(final BufferedImage image, final int width,
@@ -185,7 +185,7 @@ class ImagePHash2 {
 
     private double[][] applyDCT(final double[][] f) {
         final int N = size;
-        final double doubleN = 2.0 * N
+        final double doubleN = 2.0 * N // Pre-computing this dramatically improves performance
         final double[][] F = new double[N][N];
 
         for (int u = 0; u < N; u++) {
