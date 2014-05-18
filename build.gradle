@@ -1,0 +1,24 @@
+apply plugin: 'groovy'
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.codehaus.groovy:groovy-all:2.3.0'
+    testCompile 'junit:junit:4.11'
+}
+
+buildscript {
+    repositories {
+        maven {
+            url 'http://dl.bintray.com/cjstehno/public'
+        }
+    }
+    dependencies {
+        classpath 'gradle-templates:gradle-templates:1.4.1'
+    }
+}
+
+apply plugin:'templates'
+
+

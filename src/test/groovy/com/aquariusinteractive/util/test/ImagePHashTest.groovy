@@ -1,5 +1,7 @@
-package com.aquariusinteractive.util
+package com.aquariusinteractive.util.test
 
+import com.aquariusinteractive.util.ImagePHash
+import com.aquariusinteractive.util.ImagePHash2
 import groovy.transform.CompileStatic
 
 /**
@@ -17,7 +19,8 @@ class ImagePHashTest extends GroovyTestCase {
 
     void setUp() {
         super.setUp()
-        inputStream = getClass().getResourceAsStream("dsm.jpg")
+
+        inputStream = getClass().getResourceAsStream("/dsm.jpg")
         assert inputStream
     }
 
